@@ -1,0 +1,16 @@
+{
+  "name": "express",
+  "version": "1.0.0",
+  "description": "User Management API This is a Node.js, MongoDB, and Express API for managing user accounts. It allows you to create, update, delete, and retrieve user information. It enforces strong password rules and validates email and full name inputs.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "joi": "^17.11.0",
+    "mongoose": "^8.0.0"
+  }
+}
