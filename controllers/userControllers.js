@@ -28,24 +28,39 @@ exports.postUser = async (request, response) => {
 };
 exports.updateUser = async (request, response) => {
   try {
-    const userID = request.query.id;
-    const updatedUser = await User.replaceOne({ _id: userID }, request.body);
+    const userEmailId = request.query.emailId;
+
+    const { fullName, password } = request.body;
+    const user = await User.findOne({ emailId: userEmailId });
+
+    if (!user) {
+      return response.status(400).json({ message: "User not found" });
+    }
+
+    user.fullName = fullName;
+    user.password = password;
+
+    await user.save();
+
     response.json({
-      updatedCount: updatedUser.modifiedCount,
+      message: "user updated succefully",
     });
   } catch (error) {
-    response.status(400).json({ message: error });
+    response.status(400).json({ message: error.message });
   }
 };
 exports.deleteuser = async (request, response) => {
   try {
-    const userId = request.query.id;
-    if (!userId) {
-      return response.status(400).json("please mention the user ID");
+    const userEmailId = request.query.emailId;
+    if (!userEmailId) {
+      return response.status(400).json({ message: "user not found" });
     }
-    const deleteUser = await User.deleteOne({ _id: userId });
-    response.json({ deletCount: deleteUser.deletedCount });
+    const deleteUser = await User.deleteOne({ emailId: userEmailId });
+    response.json({
+      deletCount: deleteUser.deletedCount,
+      message: "Deleted Successfully",
+    });
   } catch (error) {
-    response.status(400).json({ message: error });
+    response.status(400).json({ message: error.message });
   }
 };

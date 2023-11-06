@@ -69,18 +69,6 @@ const userSchema = new mongoose.Schema({
       },
     ],
   },
-  gender: {
-    type: String,
-    validate: [
-      {
-        validator: (value) => {
-          const allowedGenders = ["male", "female"];
-          return allowedGenders.includes(value.toLowerCase());
-        },
-        message: "Invalid gender",
-      },
-    ],
-  },
 });
 
 userSchema.pre("save", function (next) {
