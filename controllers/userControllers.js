@@ -12,8 +12,6 @@ exports.getAllUsers = async (request, response) => {
 exports.postUser = async (request, response) => {
   try {
     const { fullName, emailId, password, gender } = await request.body;
-    // const saltRounds = await bcrypt.genSalt(10);
-    // const hashedPassword = await bcrypt.hash(password, saltRounds);
     const newUser = new User({
       fullName,
       emailId,
